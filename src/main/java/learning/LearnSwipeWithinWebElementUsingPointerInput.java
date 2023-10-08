@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.w3c.dom.css.Rect;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -35,10 +34,10 @@ public class LearnSwipeWithinWebElementUsingPointerInput {
         endX = (int) (eleRect.getX() + (eleRect.getWidth() * 0.01));
         endY = (int) (eleRect.getY() + (eleRect.getHeight() * 0.5));
         PointerInput input1 = new PointerInput(PointerInput.Kind.TOUCH, "finger 1");
-        Sequence swipeLeftInWe = new Sequence(input1,1);
-        swipeLeftInWe.addAction(input1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(),startX,startY));
+        Sequence swipeLeftInWe = new Sequence(input1, 1);
+        swipeLeftInWe.addAction(input1.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY));
         swipeLeftInWe.addAction(input1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-        swipeLeftInWe.addAction(input1.createPointerMove(Duration.ofMillis(2000), PointerInput.Origin.viewport(),endX,endY));
+        swipeLeftInWe.addAction(input1.createPointerMove(Duration.ofMillis(2000), PointerInput.Origin.viewport(), endX, endY));
         swipeLeftInWe.addAction(input1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
         driver.perform(Collections.singletonList(swipeLeftInWe));
         driver.quit();
