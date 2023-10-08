@@ -39,7 +39,7 @@ public class CommonWebWrappers extends CommonNativeWrappers {
             // dc.setCapability("platformName", platformName);
             // Comment the below line based on need
 //            dc.setCapability("noReset", true);
-            URI uri = new URI("http://0.0.0.0:4723/wd/hub");
+            URI uri = new URI("http://0.0.0.0:4723");
             if (platformName.equalsIgnoreCase("Android")) {
                 dc.setCapability("automationName", "UiAutomator2");
                 driver = new AndroidDriver(uri.toURL(), dc);

@@ -75,7 +75,7 @@ public class CommonNativeWrappers {
             dc.setCapability("deviceName", deviceName);
             // Comment the below line based on need
             //dc.setCapability("noReset", true);
-            URI uri = new URI("http://0.0.0.0:4723/wd/hub");
+            URI uri = new URI("http://0.0.0.0:4723");
             if (platformName.equalsIgnoreCase("Android")) {
                 // Comment the below line based on need
                 dc.setCapability("autoGrantPermissions", true);
