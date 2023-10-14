@@ -1,0 +1,79 @@
+Page Object Model
+
+Rules
+1. Each page should be independent
+2. Reusable methods in a separate class
+3. Each action should be a separate method
+4. Pages should extend reusable methods
+5. Every method should have a return type and it should return to the page it will land post completion
+6. Verify the page it has landed after method completion
+
+Maven
+src/main/java --> supporting files to run my TC
+src/main/resources --> files which support the src/main/java
+src/test/java --> TC
+src/test/resources --> files that would support src/test/java
+
+POM
+src/main/java
+	wrappers
+		GenericWrappers.java
+			public static AppiumDriver driver;
+			public void launchApp(....
+			public void click(...
+	pages
+		LoginPage.java extends GenericWrappers.java
+			public LoginPage() {
+			//launchApp(...
+			eleIsDisplayed(...
+			}
+			//public LoginPage launchMyApp() {
+			//launchApp(..
+			//return this;
+			//} 
+			public LoginPage enterUserName() {
+			enterValue(.....
+			return this;
+			}
+			public LoginPage enterPassword() {
+			enterValue(.....
+			return this;
+			}
+			public HomePage clickLoginForSuccess() {
+			click(....
+			return new HomePage();
+			}
+			public LoginPage clickLoginForFailure() {
+			click(....
+			return new LoginPage();
+			}
+		HomePage.java extends GenericWrappers.java
+			public HomePage() {
+			eleIsDisplayed(...
+			}
+			public HomePage verifyPageDisplayed() {
+			eleIsDisplayed(...
+			return new HomePage();
+			}
+src/main/resources
+src/test/java
+	testCases
+		TC001.java
+			public static void main(String[] args) {
+			new GenericWrappers().launchApp(....);
+			LoginPage lp = new LoginPage();
+			lp.launchMyApp().enterUserName().enterPassword().clickLoginForSuccess();
+			
+			//LoginPage lp = new LoginPage();
+			//lp.launchMyApp();
+			//HomePage hp = new HomePage();
+			//hp.verifyPageDisplayed();
+			//.enterUserName().enterPassword().clickLoginForSuccess();
+			}
+		TC002.java
+			public static void main(String[] args) {
+			new GenericWrappers().launchApp(....);
+			LoginPage lp = new LoginPage();
+			lp.launchMyApp().enterUserName().enterPassword().clickLoginForFailure();
+			}
+src/test/resources
