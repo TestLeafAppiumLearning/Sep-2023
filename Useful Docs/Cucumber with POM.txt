@@ -1,0 +1,76 @@
+Manual testing
+Suite
+	Scenario
+		Test cases
+			Steps
+
+TestNG
+Suite
+	Test
+		Class
+			Method
+
+Cucumber
+Project
+	Feature
+		Scenario
+			Step 
+
+Cucumber
+
+Rules
+1. Test cases in a feature file
+2. Implement the keywords
+3. Update the method with automation code
+
+Gherkin keyword
+Given --> Pre condition
+When --> Step to be performed
+Then --> Expected result
+And --> supporting keyword
+But --> Expected result (negative condition)
+* --> Wildcard (any)
+
+Maven
+src/main/java
+	stepDef
+		StepDef.java
+			AppiumDriver driver;
+		@Given("The application is launched")
+		public void a() {
+		DesiredCa...
+		driver = new Andr.....
+		}
+
+		@Given("I enter the valid credentials")
+		public void b() {
+		driver.fin....sendKeys...
+		driver.fin....sendKeys...
+		}
+
+		@Given("Click login button")
+		public void c() {
+		driver.find....click(....
+		}
+
+		@Given("Home page is displayed")
+		public void d() {
+		driver.findel.....eleIsDisplayed(.....
+		}
+			
+src/main/resources
+src/test/java
+	runner
+		TestRunner.java extends AbstractTestNgCucumberTests
+		//@CucumberOptions( --> skipped if feature, runner, step def are in same package)
+		@CucumberOptions(feature={"src/test/resources/feature"},glue={"stepDef"})
+		public class TestRunner() {
+		}
+src/test/resources
+	features
+		Login.feature
+		Scenario: Login for success
+		Given The application is launched
+		When I enter the valid credentials
+		And Click login button
+		Then Home page is displayed

@@ -1,0 +1,108 @@
+Manual testing
+Suite
+	Scenario
+		Test cases
+			Steps
+
+TestNG
+Suite
+	Test
+		Class
+			Method
+
+Cucumber
+Project
+	Feature
+		Scenario
+			Step 
+
+Cucumber
+
+Rules
+1. Test cases in a feature file
+2. Implement the keywords
+3. Update the method with automation code
+
+Gherkin keyword
+Given --> Pre condition
+When --> Step to be performed
+Then --> Expected result
+And --> supporting keyword
+But --> Expected result (negative condition)
+* --> Wildcard (any)
+
+Maven
+src/main/java
+	wrappers
+		GenericWrappers.java extends AbstractTestNgCucumberTests
+			public ThreadLocal<AppiumDriver> driver;
+			public void launchApp(....
+				driver.set(....
+			public void click(...
+				driver.get(...
+			
+	pages
+		LoginPage.java extends GenericWrappers.java
+			public LoginPage() {
+			//this.driver = driver;
+			//launchApp(...
+			eleIsDisplayed(...
+			}
+			//public LoginPage launchMyApp() {
+			//launchApp(..
+			//return this;
+			//} 
+			@Given("I enter the valid username")
+			public LoginPage enterUserName() {
+			enterValue(.....
+			return this;
+			}
+			@Given("I enter the valid password")
+			public LoginPage enterPassword() {
+			enterValue(.....
+			return this;
+			}
+			@Given("Click login button")
+			public HomePage clickLoginForSuccess() {
+			click(....
+			return new HomePage();
+			}
+			@Given("Click login button for invalid entries")
+			public LoginPage clickLoginForFailure() {
+			click(....
+			return new LoginPage();
+			}
+		HomePage.java extends GenericWrappers.java
+			public HomePage() {
+			//this.driver = driver;
+			eleIsDisplayed(...
+			}
+			@Given("Home page is displayed")
+			public HomePage verifyPageDisplayed() {
+			eleIsDisplayed(...
+			return new HomePage(driver);
+			}
+src/main/resources
+src/test/java
+	runner
+		TestRunner.java extends GenericWrappers
+		//@CucumberOptions( --> skipped if feature, runner, step def are in same package)
+		@CucumberOptions(feature={"src/test/resources/feature"},glue={"pages"})
+		public class TestRunner() extends GenericWrappers {
+			@BeforeMethod
+			public void bm() {
+			launchApp(....);
+			}
+			@AfterMethod
+			public void ca() {
+			closeApp(....
+			}
+		}
+src/test/resources
+	features
+		Login.feature
+		Scenario: Login for success
+		When I enter the valid username
+		And I enter the valid password
+		And Click login button
+		Then Home page is displayed
