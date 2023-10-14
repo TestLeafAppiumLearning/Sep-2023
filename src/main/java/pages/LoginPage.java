@@ -24,9 +24,9 @@ public class LoginPage extends GenericWrappers {
     //	String platform;
     public LoginPage(AppiumDriver driver, ExtentTest test) {
         this.driver = driver;
-        this.test = test;
-//		platform = driver.getCapabilities().getCapability("platformName").toString();
-//		System.out.println(platform);
+        this.node = test;
+		String platform = driver.getCapabilities().getCapability("platformName").toString();
+		System.out.println(platform);
         PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(60)), this);
         eleIsDisplayed(emailTxtBox);
     }
@@ -55,6 +55,6 @@ public class LoginPage extends GenericWrappers {
         } else {
             reportStep("Login button click failed", "fail");
         }
-        return new HomePage(driver, test);
+        return new HomePage(driver, node);
     }
 }

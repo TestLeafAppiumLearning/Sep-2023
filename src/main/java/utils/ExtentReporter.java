@@ -10,30 +10,30 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 public abstract class ExtentReporter {
 
     // public ExtentHtmlReporter report;
-    public static ExtentSparkReporter report;
+    public static ExtentSparkReporter sparkReport;
     public static ExtentReports extent;
-    public ExtentTest test, suiteTest;
+    public ExtentTest node, test;
     public String testCaseName, testNodes, testDescription, category, authors;
 
     public void initializeReport() {
         // report = new ExtentHtmlReporter("./reports/result.html");
-        report = new ExtentSparkReporter("./reports/result.html");
-        report.config().setDocumentTitle("Mobile Automation");
+        sparkReport = new ExtentSparkReporter("./reports/result.html");
+        sparkReport.config().setDocumentTitle("Mobile Automation");
         // report.setAppendExisting(true);
         extent = new ExtentReports();
-        extent.attachReporter(report);
+        extent.attachReporter(sparkReport);
     }
 
     public ExtentTest initializeTestCase(String testCaseName, String testDescription) {
-        suiteTest = extent.createTest(testCaseName, testDescription);
-        suiteTest.assignAuthor(authors);
-        suiteTest.assignCategory(category);
-        return suiteTest;
+        test = extent.createTest(testCaseName, testDescription);
+        test.assignAuthor(authors);
+        test.assignCategory(category);
+        return test;
     }
 
     public ExtentTest initializeTestNodeForEachTC(String testNodes) {
-        test = suiteTest.createNode(testNodes);
-        return test;
+        node = test.createNode(testNodes);
+        return node;
     }
 
     public abstract long takeScreenShot();
@@ -54,14 +54,14 @@ public abstract class ExtentReporter {
             }
         }
         if (status.equalsIgnoreCase("PASS")) {
-            test.pass(desc, img);
+            node.pass(desc, img);
         } else if (status.equalsIgnoreCase("FAIL")) {
-            test.fail(desc, img);
+            node.fail(desc, img);
             throw new RuntimeException();
         } else if (status.equalsIgnoreCase("WARNING")) {
-            test.warning(desc, img);
+            node.warning(desc, img);
         } else if (status.equalsIgnoreCase("INFO")) {
-            test.info(desc);
+            node.info(desc);
         }
     }
 

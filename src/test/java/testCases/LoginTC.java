@@ -19,6 +19,6 @@ public class LoginTC extends ProjectSpecificWrappers {
 
     @Test(dataProvider = "fetchData")
     public void runMyTC(String userName, String password) {
-        new LoginPage(driver, test).enterEmailAddress(userName).enterPassword(password).clickLogin();
+        new LoginPage(driver, node).enterEmailAddress(userName).enterPassword(password).clickLogin();
     }
 }

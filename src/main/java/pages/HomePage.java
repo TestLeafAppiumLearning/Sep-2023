@@ -15,7 +15,7 @@ public class HomePage extends GenericWrappers {
 
     public HomePage(AppiumDriver driver, ExtentTest test) {
         this.driver = driver;
-        this.test = test;
+        this.node = test;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
         if (eleIsDisplayed(userNameTxt)) {
             reportStep("Home page is displayed", "pass");
