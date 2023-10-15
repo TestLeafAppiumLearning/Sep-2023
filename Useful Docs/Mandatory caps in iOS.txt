@@ -1,0 +1,53 @@
+Scenario 1: To create a session with Mobile
+platformName --> iOS
+automationName --> XCUITest
+deviceName --> Exact name of the device if UDID is not passed
+
+Scenario 2: To create a session with Mobile and application not installed in device
+platformName --> iOS
+automationName --> XCUITest
+deviceName --> Exact name of the device if UDID is not passed
+app --> <absolute path of my application> C:\lokesh\demo.app
+
+Scenario 3: To create a session with Mobile and application already installed in device
+platformName --> iOS
+automationName --> XCUITest
+deviceName --> Exact name of the device if UDID is not passed
+bundleId --> name of the app bundle provided by developer
+
+Scenario 4: To create a session with Mobile in parallel
+platformName --> iOS
+automationName --> XCUITest
+deviceName --> Exact name of the device if UDID is not passed
+udid --> <udid> to be retrieved from XCode
+wdaLocalPort --> unique free port in your machine
+mjpegServerPort --> unique free port in your machine
+
+Scenario 5: To create a session with Mobile and application not installed in device in parallel
+platformName --> iOS
+automationName --> XCUITest
+deviceName --> Exact name of the device if UDID is not passed
+app --> <absolute path of my application> C:\lokesh\demo.ipa
+udid --> <udid> to be retrieved from XCode
+wdaLocalPort --> unique free port in your machine
+mjpegServerPort --> unique free port in your machine
+
+Scenario 6: To create a session with Mobile and application already installed in device in parallel
+platformName --> iOS
+automationName --> XCUITest
+deviceName --> Exact name of the device if UDID is not passed
+bundleId --> name of the app bundle provided by developer
+udid --> <udid> to be retrieved from XCode
+wdaLocalPort --> unique free port in your machine
+mjpegServerPort --> unique free port in your machine
+
+*** Above are valid for Native apps only
+** For Hybrid app --> Web view add the below cap
+webkitDebugProxyPort --> unique free port in your machine
+** For Mobile Web app add the below caps
+browserName --> Safari
+webkitDebugProxyPort --> unique free port in your machine
+** For Mobile Web app remove the below caps
+bundleId
+app
+
