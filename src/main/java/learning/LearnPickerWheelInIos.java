@@ -3,26 +3,27 @@ package learning;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.Test;
+import wrappers.GenericWrappers;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class IosFirstCodeUsingBundleId {
-    public static void main(String[] args) throws MalformedURLException, InterruptedException {
-        DesiredCapabilities dc = new DesiredCapabilities();
-        dc.setCapability("platformName", "iOS");
-        dc.setCapability("appium:deviceName", "iPhone 15 Pro Max");
-        dc.setCapability("appium:automationName", "XCUITest");
-        //dc.setCapability("appium:app", System.getProperty("user.dir") + "/apks/UiCatalog.zip");
-        dc.setCapability("bundleId","com.example.apple-samplecode.UICatalog");
-        AppiumDriver driver = new AppiumDriver(new URL("http://127.0.0.1:4723/"), dc);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        driver.findElement(AppiumBy.accessibilityId("Action Sheets")).click();
-        driver.findElement(AppiumBy.accessibilityId("Okay / Cancel")).click();
-        driver.findElement(AppiumBy.accessibilityId("OK")).click();
-        driver.findElement(AppiumBy.className("XCUIElementTypeButton")).click();
-        Thread.sleep(3000);
-        driver.quit();
+public class LearnPickerWheelInIos extends GenericWrappers {
+    @Test
+    public void runCode() {
+        launchIosApp("iPhone 14","","","com.example.apple-samplecode.UICatalog","/apks/UiCatalog.zip");
+        click(getWebElement(Locators.ACCESSIBILITY_ID.asString(), "Picker View"));
+        enterValue(getWebElement(Locators.ACCESSIBILITY_ID.asString(), "Red color component value"),"80",false);
+        enterValue(getWebElement(Locators.ACCESSIBILITY_ID.asString(), "Green color component value"),"100",false);
+        enterValue(getWebElement(Locators.ACCESSIBILITY_ID.asString(), "Blue color component value"),"90",false);
+        chooseNextOptionInPickerWheel(getWebElement(Locators.ACCESSIBILITY_ID.asString(), "Blue color component value"));
+        chooseNextOptionInPickerWheel(getWebElement(Locators.ACCESSIBILITY_ID.asString(), "Green color component value"));
+        choosePreviousOptionInPickerWheel(Locators.ACCESSIBILITY_ID.asString(), "Red color component value");
+        sleep(5000);
+        closeApp();
     }
+
+
 }

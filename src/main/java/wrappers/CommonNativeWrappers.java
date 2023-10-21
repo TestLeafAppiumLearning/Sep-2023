@@ -558,7 +558,9 @@ public class CommonNativeWrappers {
 
     // To click in web element
     public void click(WebElement ele) {
-        ele.click();
+        try {
+            ele.click();
+        }catch (Exception ignored) {};
     }
 
     // To get text in web element
